@@ -32,15 +32,15 @@ ReadFile=function(directory,id=1:332){
 
 
 # calculate pollutant means
-GetPollutantMean=function(dfList,fileName,pollutant){
-        pollutantValue=dfList[[fileName]][[pollutant]]
-        mean(pollutantValue,na.rm = TRUE)
+GetPollutant=function(dfList,fileName,pollutant){
+        dfList[[fileName]][[pollutant]]
 }
 
-GetPollutantMeanAll=function(dfList,fileName,pollutant){
-        pollutantMeanList=sapply(fileName,GetPollutantMean, 
+GetPollutantAllMean=function(dfList,fileName,pollutant){
+        pollutantList=sapply(fileName,GetPollutant, 
                                  dfList=dfList,pollutant=pollutant)
-        mean(pollutantMeanList,na.rm = TRUE)
+        pollutantVector=unlist(pollutantList,use.names = FALSE)
+        mean(pollutantVector,na.rm = TRUE)
 }
 
 
@@ -49,6 +49,6 @@ pollutantmean=function(directory,pollutant,id=1:332){
         read.file=ReadFile(directory,id)
         file.name=FileName(id)
         names(read.file)=file.name
-        GetPollutantMeanAll(read.file,file.name,pollutant)
+        GetPollutantAllMean(read.file,file.name,pollutant)
 }
         
