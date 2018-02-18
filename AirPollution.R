@@ -1,5 +1,4 @@
-# pollutantmean calculates the mean of a pollutant (sulfate or nitrate) 
-# across a specified list of monitors.
+# pollutantmean calculates the mean of a pollutant (sulfate or nitrate) across a specified list of monitors.
 
 # download files
 # file.url="https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2Fspecdata.zip"
@@ -33,7 +32,6 @@ ReadFile=function(directory,id=1:332){
 
 
 # calculate pollutant means
-# sulfate or nitrate
 GetPollutantMean=function(dfList,fileName,pollutant){
         pollutantValue=dfList[[fileName]][[pollutant]]
         mean(pollutantValue,na.rm = TRUE)
@@ -42,14 +40,12 @@ GetPollutantMean=function(dfList,fileName,pollutant){
 GetPollutantMeanAll=function(dfList,fileName,pollutant){
         pollutantMeanList=sapply(fileName,GetPollutantMean, 
                                  dfList=dfList,pollutant=pollutant)
-        #pollutantMeanList
         mean(pollutantMeanList,na.rm = TRUE)
 }
 
 
-# return the mean of a pollutant (sulfate or nitrate) 
-# across a specified list of monitors.
-pollutantmean=function(directory,id=1:332,pollutant){
+# return the mean of a pollutant (sulfate or nitrate) across a specified list of monitors.
+pollutantmean=function(directory,pollutant,id=1:332){
         read.file=ReadFile(directory,id)
         file.name=FileName(id)
         names(read.file)=file.name
